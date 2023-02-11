@@ -1,6 +1,6 @@
 import { NavigationProp } from '@react-navigation/native'
 import React, { FC } from 'react'
-import { StyleSheet, View, Text, Pressable, Alert } from 'react-native'
+import { StyleSheet, View, Text, Pressable } from 'react-native'
 import { AppStackParamList } from '../navigators/AppNavigator'
 
 interface Props {
@@ -12,13 +12,13 @@ const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
     navigation.navigate('Meeting', { meetingType: 'video_one_one' })
   }
   const handleVideoCallingGroup = () => {
-    Alert.alert('Sorry, Not yet implemented!')
+    navigation.navigate('Meeting', { meetingType: 'video_group' })
   }
   const handleAudioCallingOneToOne = () => {
-    Alert.alert('Sorry, Not yet implemented!')
+    navigation.navigate('Meeting', { meetingType: 'audio_one_one' })
   }
   const handleAudioCallingGroup = () => {
-    Alert.alert('Sorry, Not yet implemented!')
+    navigation.navigate('Meeting', { meetingType: 'audio_group' })
   }
 
   return (

@@ -1,18 +1,55 @@
+import { NavigationProp, RouteProp } from '@react-navigation/native'
 import React, { FC, useState } from 'react'
-import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Alert,
+} from 'react-native'
+import { AppStackParamList } from '../../navigators/AppNavigator'
 
-interface Props {}
+interface Props {
+  navigation: NavigationProp<AppStackParamList, 'Meeting'>
+  route: RouteProp<AppStackParamList, 'Meeting'>
+}
 
-const MeetingScreen: FC<Props> = (): JSX.Element => {
+const MeetingScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+  const {
+    params: { meetingType },
+  } = route
   const [name, setName] = useState<string>('PANKAJ')
   const [meetingId, setMeetingId] = useState<string>('')
 
   const handleGenerateNewMeetingId = () => {
-    const newId = `${Math.floor(Math.random() * 10000)}-${Math.floor(
-      Math.random() * 10000,
-    )}-${Math.floor(Math.random() * 10000)}`
+    // const newId = `${Math.floor(Math.random() * 10000)}-${Math.floor(
+    //   Math.random() * 10000,
+    // )}-${Math.floor(Math.random() * 10000)}`
+    const newId = String(Math.floor(Math.random() * 1000000))
     // console.log(newId)
     setMeetingId(newId)
+  }
+
+  const handleJoinMeeting = () => {
+    if (meetingId.length > 5 && name.length > 3) {
+      switch (meetingType) {
+        case 'video_one_one':
+          navigation.navigate('VideoCallingOneToOne', {
+            meetingId,
+          })
+          break
+        case 'video_group':
+        case 'audio_one_one':
+        case 'audio_group':
+          Alert.alert('Sorry, Not yet implemented!')
+          break
+        default:
+          Alert.alert('OOPs')
+      }
+    } else {
+      Alert.alert('Please enter valid meeting id or generate new meeting id.')
+    }
   }
 
   return (
@@ -29,7 +66,7 @@ const MeetingScreen: FC<Props> = (): JSX.Element => {
           value={meetingId}
           onChangeText={setMeetingId}
         />
-        <Pressable style={styles.btn}>
+        <Pressable onPress={handleJoinMeeting} style={styles.btn}>
           <Text style={[styles.btnTxt, { color: '#fff' }]}>Join Meeting</Text>
         </Pressable>
 
@@ -75,13 +112,13 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 5,
     backgroundColor: '#00f',
-    marginVertical: 10,
+    marginVertical: 20,
+    justifyContent: 'center',
   },
   btnTxt: {
     textAlign: 'center',
     color: '#00f',
     fontSize: 16,
-    marginVertical: 10,
     fontWeight: '600',
   },
 })
