@@ -15,12 +15,16 @@
     "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     "skipLibCheck": true,                    /* Skip type checking of declaration files. */
     "resolveJsonModule": true,                 /* Allows importing modules with a ‘.json’ extension, which is a common practice in node projects. */
-    "baseUrl": ".",
 
     /* Experimental Options */
 
     "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
     "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
+
+    "typeRoots": [
+      "node_modules/@types",
+      "src/@types"
+    ]
   },
   "exclude": [
     "node_modules", "babel.config.js", "jest.config.js"
