@@ -13,7 +13,7 @@ export type AppStackParamList = {
       | 'audio_one_one'
       | 'audio_group'
   }
-  VideoCallingOneToOne: { meetingId: string }
+  VideoCallingOneToOne: { meetingId: string; userName: string }
   //   Profile: { userId: string } | undefined;
 }
 

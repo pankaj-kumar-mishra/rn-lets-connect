@@ -19,7 +19,7 @@ const MeetingScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   const {
     params: { meetingType },
   } = route
-  const [name, setName] = useState<string>('PANKAJ')
+  const [name, setName] = useState<string>('Pankaj')
   const [meetingId, setMeetingId] = useState<string>('')
 
   const handleGenerateNewMeetingId = () => {
@@ -37,6 +37,7 @@ const MeetingScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
         case 'video_one_one':
           navigation.navigate('VideoCallingOneToOne', {
             meetingId,
+            userName: name.split(' ')[0],
           })
           break
         case 'video_group':
@@ -56,7 +57,7 @@ const MeetingScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
     <View style={styles.container}>
       <View style={styles.card}>
         <TextInput
-          style={styles.title}
+          style={styles.inputTitle}
           value={name}
           onChangeText={setName}
           autoCorrect={false}
@@ -67,7 +68,7 @@ const MeetingScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
           onChangeText={setMeetingId}
         />
         <Pressable onPress={handleJoinMeeting} style={styles.btn}>
-          <Text style={[styles.btnTxt, { color: '#fff' }]}>Join Meeting</Text>
+          <Text style={[styles.btnTxt, styles.white]}>Join Meeting</Text>
         </Pressable>
 
         <Pressable onPress={handleGenerateNewMeetingId}>
@@ -90,15 +91,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
   },
-  title: {
+  inputTitle: {
     fontSize: 24,
     fontWeight: '600',
     color: '#00f',
     textAlign: 'center',
     marginVertical: 20,
+    borderBottomWidth: 2,
+    borderBottomColor: '#00f',
   },
   input: {
-    height: 40,
+    height: 50,
     borderWidth: 1,
     borderColor: '#00f',
     borderRadius: 5,
@@ -107,6 +110,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingHorizontal: 10,
     textAlign: 'center',
+    textAlignVertical: 'center',
   },
   btn: {
     height: 40,
@@ -120,6 +124,9 @@ const styles = StyleSheet.create({
     color: '#00f',
     fontSize: 16,
     fontWeight: '600',
+  },
+  white: {
+    color: '#fff',
   },
 })
 
