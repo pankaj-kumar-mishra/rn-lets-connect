@@ -26,28 +26,18 @@ const MeetingScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
     // const newId = `${Math.floor(Math.random() * 10000)}-${Math.floor(
     //   Math.random() * 10000,
     // )}-${Math.floor(Math.random() * 10000)}`
-    const newId = String(Math.floor(Math.random() * 1000000))
+    const newId = String(Math.floor(Math.random() * 10000000))
     // console.log(newId)
     setMeetingId(newId)
   }
 
   const handleJoinMeeting = () => {
-    if (meetingId.length > 5 && name.length > 3) {
-      switch (meetingType) {
-        case 'video_one_one':
-          navigation.navigate('VideoCallingOneToOne', {
-            meetingId,
-            userName: name.split(' ')[0],
-          })
-          break
-        case 'video_group':
-        case 'audio_one_one':
-        case 'audio_group':
-          Alert.alert('Sorry, Not yet implemented!')
-          break
-        default:
-          Alert.alert('OOPs')
-      }
+    if (meetingId.length > 5 && name.trim().length > 3) {
+      navigation.navigate('VideoAudioCalling', {
+        meetingId,
+        userName: name.split(' ')[0],
+        meetingType,
+      })
     } else {
       Alert.alert('Please enter valid meeting id or generate new meeting id.')
     }
@@ -61,11 +51,13 @@ const MeetingScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
           value={name}
           onChangeText={setName}
           autoCorrect={false}
+          placeholder="Enter your name"
         />
         <TextInput
           style={styles.input}
           value={meetingId}
           onChangeText={setMeetingId}
+          placeholder="Enter meeting ID"
         />
         <Pressable onPress={handleJoinMeeting} style={styles.btn}>
           <Text style={[styles.btnTxt, styles.white]}>Join Meeting</Text>
