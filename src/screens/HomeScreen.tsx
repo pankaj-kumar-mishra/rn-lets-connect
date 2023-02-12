@@ -8,32 +8,32 @@ interface Props {
 }
 
 const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
-  const handleVideoCallingOneToOne = () => {
-    navigation.navigate('Meeting', { meetingType: 'video_one_one' })
-  }
-  const handleVideoCallingGroup = () => {
-    navigation.navigate('Meeting', { meetingType: 'video_group' })
-  }
   const handleAudioCallingOneToOne = () => {
     navigation.navigate('Meeting', { meetingType: 'audio_one_one' })
   }
   const handleAudioCallingGroup = () => {
     navigation.navigate('Meeting', { meetingType: 'audio_group' })
   }
+  const handleVideoCallingOneToOne = () => {
+    navigation.navigate('Meeting', { meetingType: 'video_one_one' })
+  }
+  const handleVideoCallingGroup = () => {
+    navigation.navigate('Meeting', { meetingType: 'video_group' })
+  }
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={handleVideoCallingOneToOne} style={styles.button}>
-        <Text style={styles.text}>Video Calling (One to One)</Text>
-      </Pressable>
-      <Pressable onPress={handleVideoCallingGroup} style={styles.button}>
-        <Text style={styles.text}>Video Calling (Group)</Text>
-      </Pressable>
       <Pressable onPress={handleAudioCallingOneToOne} style={styles.button}>
         <Text style={styles.text}>Audio Calling (One to One)</Text>
       </Pressable>
       <Pressable onPress={handleAudioCallingGroup} style={styles.button}>
         <Text style={styles.text}>Audio Calling (Group)</Text>
+      </Pressable>
+      <Pressable onPress={handleVideoCallingOneToOne} style={styles.button}>
+        <Text style={styles.text}>Video Calling (One to One)</Text>
+      </Pressable>
+      <Pressable onPress={handleVideoCallingGroup} style={styles.button}>
+        <Text style={styles.text}>Video Calling (Group)</Text>
       </Pressable>
     </View>
   )

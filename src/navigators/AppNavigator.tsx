@@ -2,18 +2,24 @@ import React, { FC } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from '../screens/HomeScreen'
 import MeetingScreen from '../screens/MeetingScreen'
-import VideoCallingOneToOneScreen from '../screens/VideoCallingOneToOneScreen'
+import VideoAudioCallingScreen from '../screens/VideoAudioCallingScreen'
+
+type MeetingType =
+  | 'video_one_one'
+  | 'video_group'
+  | 'audio_one_one'
+  | 'audio_group'
 
 export type AppStackParamList = {
   Home: undefined
   Meeting: {
-    meetingType:
-      | 'video_one_one'
-      | 'video_group'
-      | 'audio_one_one'
-      | 'audio_group'
+    meetingType: MeetingType
   }
-  VideoCallingOneToOne: { meetingId: string; userName: string }
+  VideoAudioCalling: {
+    meetingId: string
+    userName: string
+    meetingType: MeetingType
+  }
   //   Profile: { userId: string } | undefined;
 }
 
@@ -28,8 +34,8 @@ const AppNavigator: FC<Props> = (): JSX.Element => {
       <Stack.Screen name="Meeting" component={MeetingScreen} />
       {/* ZEGO CLOUD */}
       <Stack.Screen
-        name="VideoCallingOneToOne"
-        component={VideoCallingOneToOneScreen}
+        name="VideoAudioCalling"
+        component={VideoAudioCallingScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
