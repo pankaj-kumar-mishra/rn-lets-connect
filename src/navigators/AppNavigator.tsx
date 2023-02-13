@@ -4,11 +4,11 @@ import HomeScreen from '../screens/HomeScreen'
 import MeetingScreen from '../screens/MeetingScreen'
 import VideoAudioCallingScreen from '../screens/VideoAudioCallingScreen'
 
-type MeetingType =
-  | 'video_one_one'
-  | 'video_group'
+export type MeetingType =
   | 'audio_one_one'
   | 'audio_group'
+  | 'video_one_one'
+  | 'video_group'
 
 export type AppStackParamList = {
   Home: undefined
