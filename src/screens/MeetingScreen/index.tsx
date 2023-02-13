@@ -1,5 +1,5 @@
 import { NavigationProp, RouteProp } from '@react-navigation/native'
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useLayoutEffect } from 'react'
 import {
   StyleSheet,
   View,
@@ -8,8 +8,22 @@ import {
   Pressable,
   Alert,
 } from 'react-native'
-import { AppStackParamList } from '../../navigators/AppNavigator'
+import { AppStackParamList, MeetingType } from '../../navigators/AppNavigator'
 
+const getTitle = (meetingName: MeetingType) => {
+  switch (meetingName) {
+    case 'audio_one_one':
+      return 'Audio: One to One'
+    case 'audio_group':
+      return 'Audio: Group'
+    case 'video_one_one':
+      return 'Video: One to One'
+    case 'video_group':
+      return 'Video: Group'
+    default:
+      return 'Video/Audio'
+  }
+}
 interface Props {
   navigation: NavigationProp<AppStackParamList, 'Meeting'>
   route: RouteProp<AppStackParamList, 'Meeting'>
@@ -21,6 +35,12 @@ const MeetingScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   } = route
   const [name, setName] = useState<string>('Pankaj')
   const [meetingId, setMeetingId] = useState<string>('')
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: `Meeting (${getTitle(meetingType)})`,
+    })
+  }, [])
 
   const handleGenerateNewMeetingId = () => {
     // const newId = `${Math.floor(Math.random() * 10000)}-${Math.floor(
